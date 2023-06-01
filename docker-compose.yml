@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  mysqlserver:
+    container_name: dp-fitpass
+    image: mysql
+    working_dir: /usr/src/app
+    environment:
+      MYSQL_ROOT_PASSWORD: superpass
+      MYSQL_DATABASE: fitpass
+      MYSQL_USER: db_fitpass
+      MYSQL_PASSWORD: senha123
+
+    ports:
+     - 3306:3306
