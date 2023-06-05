@@ -11,7 +11,7 @@ interface CreateExerciseRequest {
 }
 
 export class ExerciseService {
-    constructor(private readonly exerciseRepository: ExercisesRepository) {}
+    constructor(private exerciseRepository: ExercisesRepository) {}
 
     async createExercise(request: CreateExerciseRequest): Promise<Exercise> {
         const exercise = await this.exerciseRepository.create(request);
