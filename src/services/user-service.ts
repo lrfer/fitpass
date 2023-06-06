@@ -1,6 +1,7 @@
 import { hash } from 'bcryptjs';
 import { UsersRepository } from '@/repositories/users-repository';
 import { UserAlreadyExistError } from './errors/user-already-exist-error';
+import { InvalidCredentialsError } from './errors/invalid-credentials-error';
 
 interface CreateUserRequest {
 	name: string;
@@ -12,6 +13,7 @@ interface CreateUserRequest {
 
 export class UserService {
 	constructor(private usersRepository: UsersRepository) {}
+
 	async createUser({
 		name,
 		email,
@@ -35,4 +37,20 @@ export class UserService {
 			birthday,
 		});
 	}
+
+	async getUserByEmail(email: string) {
+		const user = await this.usersRepository.findByEmail(email);
+
+		if (!user) {
+			throw new InvalidCredentialsError();
+		}
+
+		return { user };
+	}
+
+	async deleteByEmail(email: string) {
+		const user = this.getUserByEmail(email);
+		await this.usersRepository.deleteByEmail(email);
+	}
+	
 }
