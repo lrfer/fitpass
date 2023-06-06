@@ -23,17 +23,9 @@ CREATE TABLE `personals` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `trainees` (
-    `userId` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `trainees_userId_key`(`userId`),
-    PRIMARY KEY (`userId`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `trainings` (
     `id` VARCHAR(191) NOT NULL,
-    `traineeUserId` VARCHAR(191) NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -45,6 +37,25 @@ CREATE TABLE `exercises` (
     `target_muscle` VARCHAR(191) NOT NULL,
     `machine` VARCHAR(191) NOT NULL,
     `comment` VARCHAR(191) NULL,
+    `reps` INTEGER NOT NULL,
+    `sets` INTEGER NOT NULL,
+    `restTime` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `userOnPersonal` (
+    `userId` VARCHAR(191) NOT NULL,
+    `personalUserId` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`userId`, `personalUserId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ExerciseOnTrainig` (
+    `id` VARCHAR(191) NOT NULL,
+    `exerciseId` VARCHAR(191) NOT NULL,
     `trainingId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -54,10 +65,16 @@ CREATE TABLE `exercises` (
 ALTER TABLE `personals` ADD CONSTRAINT `personals_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `trainees` ADD CONSTRAINT `trainees_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `trainings` ADD CONSTRAINT `trainings_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `trainings` ADD CONSTRAINT `trainings_traineeUserId_fkey` FOREIGN KEY (`traineeUserId`) REFERENCES `trainees`(`userId`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `userOnPersonal` ADD CONSTRAINT `userOnPersonal_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `exercises` ADD CONSTRAINT `exercises_trainingId_fkey` FOREIGN KEY (`trainingId`) REFERENCES `trainings`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `userOnPersonal` ADD CONSTRAINT `userOnPersonal_personalUserId_fkey` FOREIGN KEY (`personalUserId`) REFERENCES `personals`(`userId`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `ExerciseOnTrainig` ADD CONSTRAINT `ExerciseOnTrainig_exerciseId_fkey` FOREIGN KEY (`exerciseId`) REFERENCES `exercises`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `ExerciseOnTrainig` ADD CONSTRAINT `ExerciseOnTrainig_trainingId_fkey` FOREIGN KEY (`trainingId`) REFERENCES `trainings`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
