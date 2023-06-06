@@ -1,0 +1,73 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table users {
+  id String [pk]
+  name String [not null]
+  email String [unique, not null]
+  password_hash String [not null]
+  phone String [not null]
+  birthday DateTime [not null]
+  created_at DateTime [default: `now()`, not null]
+  Personal personals
+  Training trainings [not null]
+  UserOnPersonal userOnPersonal [not null]
+}
+
+Table personals {
+  cref String [unique, not null]
+  user users [not null]
+  userId String [pk]
+  UserOnPersonal userOnPersonal [not null]
+}
+
+Table trainings {
+  id String [pk]
+  user users [not null]
+  ExercisesOnTraining exercisesOnTraining [not null]
+  userId String [not null]
+}
+
+Table exercises {
+  id String [pk]
+  name String [not null]
+  target_muscle String [not null]
+  machine String [not null]
+  comment String
+  reps Int [not null]
+  sets Int [not null]
+  restTime Int [not null]
+  ExercisesOnTraining exercisesOnTraining [not null]
+}
+
+Table exercisesOnTraining {
+  id String [pk]
+  exercise exercises [not null]
+  training trainings [not null]
+  exerciseId String [not null]
+  trainingId String [not null]
+}
+
+Table userOnPersonal {
+  user users [not null]
+  trainer personals [not null]
+  userId String [not null]
+  personalUserId String [not null]
+
+  indexes {
+    (userId, personalUserId) [pk]
+  }
+}
+
+Ref: personals.userId - users.id
+
+Ref: trainings.userId > users.id
+
+Ref: exercisesOnTraining.exerciseId > exercises.id
+
+Ref: exercisesOnTraining.trainingId > trainings.id
+
+Ref: userOnPersonal.userId > users.id
+
+Ref: userOnPersonal.personalUserId > personals.userId
