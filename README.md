@@ -46,4 +46,4 @@ npx prisma studio
 
 ## Diagrama
 
-![Diagrama]("./src/assets/img/diagram.png")
+![Diagrama](/src/assets/img/diagram.png?raw=true 'Diagrama Banco')
