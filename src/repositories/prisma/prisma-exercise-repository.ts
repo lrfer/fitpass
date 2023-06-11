@@ -9,4 +9,38 @@ export class PrismaExerciseRepository implements ExercisesRepository  {
 		});
 		return exercise;
 	}
+	async getAll(): Promise<Exercise[]> {
+		const exercises = await prisma.exercise.findMany();
+		return exercises;
+	}
+	async get(id: string): Promise<Exercise> {
+		const exercise = await prisma.exercise.findUnique({
+			where: {
+				id,
+			},
+		});
+		if (!exercise) {
+			return {} as Exercise;
+		  }
+
+		return exercise;
+	}
+	async delete(id: string): Promise<Exercise> {
+		const exercise = await prisma.exercise.delete({
+			where: {
+				id,
+			},
+		});
+		return exercise;
+	}
+	async update(id: string, data: Prisma.ExerciseUpdateInput): Promise<Exercise> {
+		const exercise = await prisma.exercise.update({
+			where: {
+				id,
+			},
+			data,
+		});
+		return exercise;
+	}
+
 }
