@@ -1,4 +1,5 @@
 import { UserAlreadyExistError } from '@/services/errors/user-already-exist-error';
+import { InvalidCredentialsError } from '@/services/errors/invalid-credentials-error';
 import { makeUserService } from '@/services/factories/make-register-service';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
@@ -32,6 +33,57 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 		return reply.status(201).send();
 	} catch (err) {
 		if (err instanceof UserAlreadyExistError) {
+			return reply.status(400).send({ message: err.message });
+		}
+		throw err;
+	}
+}
+
+export async function getUsers(request: FastifyRequest, reply: FastifyReply) {
+	const registerBodySchema = z.object({
+		email: z.string().email(),
+		name: z.string()
+	});
+
+	const { email, name } = registerBodySchema.parse(
+		request.query
+	);
+
+	try {
+
+		console.log(email);
+		console.log(name)
+
+		const userService = makeUserService();
+
+		await userService.getUserByEmail(email);
+
+		return reply.status(201).send();
+	} catch (err) {
+		if (err instanceof InvalidCredentialsError) {
+			return reply.status(400).send({ message: err.message });
+		}
+		throw err;
+	}
+}
+
+export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
+	const registerBodySchema = z.object({
+		email: z.string().email()
+	});
+
+	const { email } = registerBodySchema.parse(
+		request.params
+	);
+
+	try {
+		const userService = makeUserService();
+
+		await userService.deleteByEmail(email);
+
+		return reply.status(201).send();
+	} catch (err) {
+		if (err instanceof InvalidCredentialsError) {
 			return reply.status(400).send({ message: err.message });
 		}
 		throw err;
