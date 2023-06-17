@@ -51,14 +51,11 @@ export async function getUsers(request: FastifyRequest, reply: FastifyReply) {
 
 	try {
 
-		console.log(email);
-		console.log(name)
-
 		const userService = makeUserService();
 
-		await userService.getUserByEmail(email);
+		const user = await userService.getUserByEmail(email);
 
-		return reply.status(201).send();
+		return user;
 	} catch (err) {
 		if (err instanceof InvalidCredentialsError) {
 			return reply.status(400).send({ message: err.message });
@@ -77,6 +74,8 @@ export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
 	);
 
 	try {
+
+		console.log(email);
 		const userService = makeUserService();
 
 		await userService.deleteByEmail(email);

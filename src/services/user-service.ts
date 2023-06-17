@@ -55,11 +55,11 @@ export class UserService {
 	async deleteByEmail(email: string) {
 		const user = this.getUserByEmail(email);
 
-		await this.personalRepository.deleteByUserId((await user).user.id);
+		this.personalRepository.deleteByUserId((await user).user.id);
 
-		await this.traineeRepository.deleteByUserId((await user).user.id);
+		this.traineeRepository.deleteByUserId((await user).user.id);
 
-		await this.usersRepository.deleteByEmail(email);
+		this.usersRepository.deleteByEmail(email);
 	}
 	
 }

@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { register, getUsers, deleteUser } from './controllers/user';
+import { create, getTraining, getAll } from './controllers/training';
 import { authenticate } from './controllers/authenticate';
 import { createExercise, deleteExercise, getAllExercises, getExercise, updateExercise } from './controllers/exercise';
 
@@ -14,4 +15,8 @@ export async function appRoutes(app: FastifyInstance) {
 	app.get('/exercise/get/:id', getExercise)
 	app.delete('/exercise/delete', deleteExercise)
 	app.put('/exercise/update', updateExercise)
+
+	app.post('/training', create);
+	app.get('/training/:id', getTraining);
+	app.get('/training', getAll);
 }
