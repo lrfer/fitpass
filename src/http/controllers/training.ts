@@ -36,7 +36,10 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
         const training = await trainingService.create(trainingData);
         return reply.status(200).send(training);
     } catch (err) {
-        console.error("Error", err);
+        if (err instanceof Error) {
+			return reply.status(422).send({ message: err.message });
+		}
+        throw err;
     }
 }
 
@@ -70,7 +73,10 @@ export async function updateTraining(request: FastifyRequest, reply: FastifyRepl
         const training = await trainingService.update(trainingId, trainingData);
         return reply.status(200).send(training);
     } catch (err) {
-        console.error("Error", err);
+        if (err instanceof Error) {
+			return reply.status(422).send({ message: err.message });
+		}
+        throw err;
     }
 }
 
@@ -87,7 +93,13 @@ export async function getTraining(request: FastifyRequest, reply: FastifyReply) 
         const { id } = createTrainingBodySchema.parse(request.params);
 
         const training = await trainingService.getTraning(id);
-        return reply.status(200).send(training);
+
+        if (training != null) {
+            return reply.status(200).send(training);
+        } else {
+            return reply.status(422).send({ message: "Não possível processar sua solicitação. Treino não encontrado." });
+        }
+
     } catch (err) {
         console.error("Error", err);
     }
@@ -97,7 +109,13 @@ export async function getAll(request: FastifyRequest, reply: FastifyReply) {
     try {
         const trainingService = makeTrainingService();
         const training = await trainingService.getAll();
-        return reply.status(200).send(training);
+        
+        if (training != null && training.length != 0) {
+            return reply.status(200).send(training);
+        } else {
+            return reply.status(422).send({ message: "Não há treinos cadastrados." });
+        }
+
     } catch (err) {
         console.error("Error", err);
     }

@@ -1,24 +1,26 @@
 import { Prisma, Training } from '@prisma/client';
 import { TrainingRepository } from '@/repositories/training-repository';
+import { InvalidCredentialsError } from './errors/invalid-credentials-error';
 
 export class TrainingService {
   constructor(private trainingRepository: TrainingRepository) {}
 
-  async create(trainingData: Prisma.TrainingCreateInput): Promise<Training> {
+  async create(trainingData: Prisma.TrainingCreateInput): Promise<Training | null> {
     try {
       const treinamento = await this.trainingRepository.create(trainingData);
       return treinamento;
     } catch (error) {
-      throw new Error('Erro ao criar o treinamento');
+      throw new Error('Não foi possível processar sua solicitação.');
     }
   }
 
   async getTraning(id: string): Promise<Training | null> {
     try {
       const treinamento = await this.trainingRepository.findById(id);
+
       return treinamento;
     } catch (error) {
-      throw new Error('Erro ao criar o treinamento');
+      throw new Error('Erro ao buscar o treino');
     }
   }
 
@@ -45,7 +47,7 @@ export class TrainingService {
       return training;
     } catch (error) {
       console.error(error);
-      throw new Error('Erro ao alterar o treinamento');
+      throw new Error('Não foi possível processar sua solicitação.');
     }
   }
 

@@ -1,13 +1,16 @@
 import { prisma } from '@/lib/prisma';
-import { Prisma, Training, Exercise } from '@prisma/client';
+import { Prisma, Training } from '@prisma/client';
 import { TrainingRepository } from '../training-repository'
-import { InvalidCredentialsError } from '../../services/errors/invalid-credentials-error';
 
 export class PrismaTrainingRepository implements TrainingRepository {
   async create(trainingData: Prisma.TrainingCreateInput): Promise<Training> {
     const treinamento = await prisma.training.create({
       data: trainingData,
+      include: {
+        ExerciseOnTrainig: true
+      }
     });
+
     return treinamento;
   }
 
@@ -97,11 +100,14 @@ export class PrismaTrainingRepository implements TrainingRepository {
           id,
         },
         data,
+        include: {
+          ExerciseOnTrainig: true
+        }
       });
       return training;
     } catch (error) {
       console.error("Erro ao atualizar o treinamento:", error);
-      throw new Error("Erro ao atualizar o treinamento");
+      throw new Error("Não possível processar sua solicitação.");
     }
   }
 

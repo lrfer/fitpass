@@ -1,7 +1,7 @@
 import { Prisma, Training } from '@prisma/client';
 
 export interface TrainingRepository {
-    create(trainingData: Prisma.TrainingCreateInput): Promise<Training>;
+    create(trainingData: Prisma.TrainingCreateInput): Promise<Training | null>;
     findById(id: string): Promise<Training | null>;
     getAll(): Promise<Training[]>;
     deleteByUserId(id: string): Promise<void>;

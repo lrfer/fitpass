@@ -13,6 +13,17 @@ export class PrismaUserRepository implements UsersRepository {
 
 		return user;
 	}
+
+	async findById(id: string): Promise<User | null> {
+		const user = await prisma.user.findUnique({
+			where: {
+				id,
+			},
+		});
+
+		return user;
+	}
+
 	async create(data: Prisma.UserUncheckedCreateInput): Promise<User> {
 		const user = await prisma.user.create({
 			data,
@@ -32,5 +43,21 @@ export class PrismaUserRepository implements UsersRepository {
 		await prisma.user.delete({ where: { id: userId } });
 
 		return user;
+	}
+
+	async update(id: string, data: Prisma.UserUpdateInput): Promise<User | null> {
+		try {
+			console.log(id);
+			const user = await prisma.user.update({
+				where: {
+					id
+				},
+				data,
+			});
+			return user;
+		} catch (error) {
+			console.error(error);
+			throw new Error("Erro processar solicitação.");
+		}
 	}
 }

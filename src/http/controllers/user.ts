@@ -3,6 +3,7 @@ import { InvalidCredentialsError } from '@/services/errors/invalid-credentials-e
 import { makeUserService } from '@/services/factories/make-register-service';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
+import { hash } from 'bcryptjs';
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
 	const registerBodySchema = z.object({
@@ -31,6 +32,46 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 		});
 
 		return reply.status(201).send();
+	} catch (err) {
+		if (err instanceof UserAlreadyExistError) {
+			return reply.status(400).send({ message: err.message });
+		}
+		throw err;
+	}
+}
+
+export async function updateUser(request: FastifyRequest, reply: FastifyReply) {
+	const registerBodySchema = z.object({
+		id: z.string(),
+		name: z.string(),
+		email: z.string().email(),
+		password: z.string().min(6),
+		phone: z.string(),
+		birthday: z.coerce.date(),
+	});
+
+	const { id, name, email, password, phone, birthday } = registerBodySchema.parse(
+		request.body
+	);
+
+	try {
+		const userService = makeUserService();
+
+		const userResult = await userService.getUserById(id);
+
+		const password_hash = await hash(password, 6);
+
+		const user = {
+			name,
+			email,
+			password_hash,
+			phone,
+			birthday,
+		};
+
+		const userUpdate = await userService.update(userResult.id, user);
+
+		return reply.status(200).send(userUpdate);
 	} catch (err) {
 		if (err instanceof UserAlreadyExistError) {
 			return reply.status(400).send({ message: err.message });

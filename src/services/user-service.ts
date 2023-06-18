@@ -1,4 +1,5 @@
 import { hash } from 'bcryptjs';
+import { Prisma, User } from '@prisma/client';
 import { UsersRepository } from '@/repositories/users-repository';
 import { TrainingRepository } from '@/repositories/training-repository';
 import { UserAlreadyExistError } from './errors/user-already-exist-error';
@@ -40,6 +41,17 @@ export class UserService {
 		});
 	}
 
+	async update(id: string, data: Prisma.UserUpdateInput): Promise<User | null> {
+		try {
+			const user = await this.usersRepository.update(id, data);
+			return user;
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+
+	}
+
 	async getUserByEmail(email: string) {
 		const user = await this.usersRepository.findByEmail(email);
 
@@ -50,9 +62,19 @@ export class UserService {
 		return user;
 	}
 
+	async getUserById(id: string) {
+		const user = await this.usersRepository.findById(id);
+
+		if (!user) {
+			throw new InvalidCredentialsError();
+		}
+
+		return user;
+	}
+
 	async deleteByEmail(email: string) {
 		try {
-			
+
 			const user = await this.getUserByEmail(email);
 			const userId = user.id;
 
