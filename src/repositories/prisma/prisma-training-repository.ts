@@ -24,7 +24,11 @@ export class PrismaTrainingRepository implements TrainingRepository {
   }
 
   async getAll(): Promise<Training[]> {
-    const trainings = await prisma.training.findMany();
+    const trainings = await prisma.training.findMany({
+      include: {
+        ExerciseOnTrainig: true
+      }
+    });
     return trainings;
   }
 
