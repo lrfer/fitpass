@@ -74,17 +74,15 @@ export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
 	);
 
 	try {
-
-		console.log(email);
 		const userService = makeUserService();
 
 		await userService.deleteByEmail(email);
 
-		return reply.status(201).send();
+		return reply.status(204).send();
 	} catch (err) {
 		if (err instanceof InvalidCredentialsError) {
 			return reply.status(400).send({ message: err.message });
 		}
-		throw err;
+		console.error("Error", err);
 	}
 }

@@ -1,7 +1,6 @@
 import { hash } from 'bcryptjs';
 import { UsersRepository } from '@/repositories/users-repository';
-import { PersonalRepository } from '@/repositories/personals-repository';
-import { TraineeRepository } from '@/repositories/trainees-repository';
+import { TrainingRepository } from '@/repositories/training-repository';
 import { UserAlreadyExistError } from './errors/user-already-exist-error';
 import { InvalidCredentialsError } from './errors/invalid-credentials-error';
 
@@ -15,8 +14,7 @@ interface CreateUserRequest {
 
 export class UserService {
 	constructor(private usersRepository: UsersRepository,
-		private personalRepository: PersonalRepository,
-		private traineeRepository: TraineeRepository) {}
+		private trainingRepository: TrainingRepository) { }
 
 	async createUser({
 		name,
@@ -49,17 +47,24 @@ export class UserService {
 			throw new InvalidCredentialsError();
 		}
 
-		return { user };
+		return user;
 	}
 
 	async deleteByEmail(email: string) {
-		const user = this.getUserByEmail(email);
+		try {
+			
+			const user = await this.getUserByEmail(email);
+			const userId = user.id;
 
-		this.personalRepository.deleteByUserId((await user).user.id);
+			console.log(userId);
 
-		this.traineeRepository.deleteByUserId((await user).user.id);
+			await this.trainingRepository.deleteByUserId(userId);
+			await this.usersRepository.deleteByEmail(email);
 
-		this.usersRepository.deleteByEmail(email);
+			console.log('Usuário e treinamentos excluídos com sucesso.');
+		} catch (error) {
+			throw new Error('Erro ao excluir o usuário e treinamentos pelo email');
+		}
 	}
-	
+
 }

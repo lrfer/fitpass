@@ -30,4 +30,31 @@ export class TrainingService {
       throw new Error('Erro ao criar o treinamento');
     }
   }
+
+  async delete(id: string): Promise<void> {
+    try {
+      await this.trainingRepository.deleteById(id);
+    } catch (error) {
+      throw new Error('Erro ao deletar o treinamento');
+    }
+  }
+
+  async update(id: string, data: Prisma.TrainingUpdateInput): Promise<Training | null> {
+    try {
+      const training = await this.trainingRepository.update(id, data);
+      return training;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Erro ao alterar o treinamento');
+    }
+  }
+
+  async removeExerciseFromTraining(exerciseId: string, trainingId: string): Promise<void> {
+    try {
+      await this.trainingRepository.removeExerciseFromTraining(exerciseId, trainingId);
+    } catch (error) {
+      console.error(error);
+      throw new Error('Erro ao alterar o treinamento');
+    }
+  }
 }

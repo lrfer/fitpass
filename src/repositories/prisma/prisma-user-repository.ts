@@ -22,13 +22,15 @@ export class PrismaUserRepository implements UsersRepository {
 
 	async deleteByEmail(email: string): Promise<User | null> {
 		const user = await prisma.user.findUnique({ where: { email } });
-	
+
 		if (!user) {
 			throw new InvalidCredentialsError();
 		}
-	
-		await prisma.user.delete({ where: { id: user.id } });
-	
+
+		const userId = user.id;
+
+		await prisma.user.delete({ where: { id: userId } });
+
 		return user;
-	  }
+	}
 }
