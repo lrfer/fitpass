@@ -13,6 +13,10 @@ interface CreateUserRequest {
 	birthday: Date;
 }
 
+interface RegisterUserResponse{
+	user: User;
+}
+
 export class UserService {
 	constructor(private usersRepository: UsersRepository,
 		private trainingRepository: TrainingRepository) { }
@@ -23,7 +27,7 @@ export class UserService {
 		password,
 		phone,
 		birthday,
-	}: CreateUserRequest) {
+	}: CreateUserRequest) : Promise<RegisterUserResponse> {
 		const userWithSameEmail = await this.usersRepository.findByEmail(email);
 
 		if (userWithSameEmail) {
@@ -32,13 +36,17 @@ export class UserService {
 
 		const password_hash = await hash(password, 6);
 
-		await this.usersRepository.create({
+		const user = await this.usersRepository.create({
 			name,
 			email,
 			password_hash,
 			phone,
 			birthday,
 		});
+
+		return {
+			user,
+		}
 	}
 
 	async update(id: string, data: Prisma.UserUpdateInput): Promise<User | null> {

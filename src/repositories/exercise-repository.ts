@@ -6,5 +6,4 @@ export interface ExercisesRepository {
 	get(id: string): Promise<Exercise>;
 	delete(id: string): Promise<Exercise>;
 	update(id: string, data: Prisma.ExerciseUpdateInput): Promise<Exercise>;
-	
 }

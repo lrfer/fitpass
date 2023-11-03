@@ -45,19 +45,21 @@ export class PrismaUserRepository implements UsersRepository {
 		return user;
 	}
 
-	async update(id: string, data: Prisma.UserUpdateInput): Promise<User | null> {
+	async update(
+		id: string,
+		data: Prisma.UserUpdateInput
+	): Promise<User | null> {
 		try {
-			console.log(id);
 			const user = await prisma.user.update({
 				where: {
-					id
+					id,
 				},
 				data,
 			});
 			return user;
 		} catch (error) {
 			console.error(error);
-			throw new Error("Erro processar solicitação.");
+			throw new Error('Erro processar solicitação.');
 		}
 	}
 }

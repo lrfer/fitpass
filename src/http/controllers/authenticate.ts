@@ -1,7 +1,13 @@
+import { User } from '@prisma/client';
 import { InvalidCredentialsError } from '@/services/errors/invalid-credentials-error';
 import { makeAuthService } from '@/services/factories/make-auth-service';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
+
+interface userRestrict {
+	id: string;
+	name: string;
+}
 
 export async function authenticate(
 	request: FastifyRequest,
@@ -19,7 +25,12 @@ export async function authenticate(
 
 		const { user } = await userService.authUser({ email, password });
 
-		const token = await reply.jwtSign({}, { sign: { sub: user.id } });
+		const UserPerfil = { id: user.id, name: user.name };
+
+		const token = await reply.jwtSign(
+			{ UserPerfil },
+			{ sign: { sub: user.id } }
+		);
 
 		return reply.status(200).send({ token });
 	} catch (err) {

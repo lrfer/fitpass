@@ -1,8 +1,8 @@
 import { prisma } from '@/lib/prisma';
-import { Exercise, Prisma} from '@prisma/client';
+import { Exercise, Prisma } from '@prisma/client';
 import { ExercisesRepository } from '../exercise-repository';
 
-export class PrismaExerciseRepository implements ExercisesRepository  {
+export class PrismaExerciseRepository implements ExercisesRepository {
 	async create(data: Prisma.ExerciseCreateInput): Promise<Exercise> {
 		const exercise = await prisma.exercise.create({
 			data,
@@ -21,7 +21,7 @@ export class PrismaExerciseRepository implements ExercisesRepository  {
 		});
 		if (!exercise) {
 			return {} as Exercise;
-		  }
+		}
 
 		return exercise;
 	}
@@ -33,7 +33,10 @@ export class PrismaExerciseRepository implements ExercisesRepository  {
 		});
 		return exercise;
 	}
-	async update(id: string, data: Prisma.ExerciseUpdateInput): Promise<Exercise> {
+	async update(
+		id: string,
+		data: Prisma.ExerciseUpdateInput
+	): Promise<Exercise> {
 		const exercise = await prisma.exercise.update({
 			where: {
 				id,
@@ -42,5 +45,4 @@ export class PrismaExerciseRepository implements ExercisesRepository  {
 		});
 		return exercise;
 	}
-
 }

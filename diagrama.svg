@@ -1,0 +1,579 @@
+<svg version="1.1" baseProfile="full" width="3747.0" height="661.0" viewbox="0 0 3747 661" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[&lt;interface&gt;ExercisesRepository||+create(): Promise&lt;Exercise&gt;;+getAll(): Promise&lt;Exercise\[\]&gt;;+get(): Promise&lt;Exercise&gt;;+delete(): Promise&lt;Exercise&gt;;+update(): Promise&lt;Exercise&gt;]
+[&lt;interface&gt;PersonalRepository||+create(): Promise&lt;Personal&gt;;+findById(): Promise&lt;Personal \| null&gt;;+deleteByUserId(): Promise&lt;Personal \| null&gt;]
+[&lt;interface&gt;TraineeRepository||+create(): Promise&lt;Trainee&gt;;+findById(): Promise&lt;any&gt;;+deleteByUserId(): Promise&lt;any&gt;]
+[&lt;interface&gt;TrainingRepository||+create(): Promise&lt;Training \| null&gt;;+findById(): Promise&lt;Training \| null&gt;;+getAll(): Promise&lt;Training\[\]&gt;;+deleteByUserId(): Promise&lt;void&gt;;+deleteById(): Promise&lt;void&gt;;+findByUserId(): Promise&lt;Training\[\]&gt;;+update(): Promise&lt;Training \| null&gt;;+removeExerciseFromTraining(): Promise&lt;void&gt;]
+[&lt;interface&gt;UsersRepository||+create(): Promise&lt;User&gt;;+findByEmail(): Promise&lt;User \| null&gt;;+findById(): Promise&lt;User \| null&gt;;+deleteByEmail(): Promise&lt;User \| null&gt;;+update(): Promise&lt;User \| null&gt;]
+[AuthService|-usersRepository: UsersRepository|+authUser(): Promise&lt;AuthResponse&gt;]
+[&lt;interface&gt;AuthRequest|+email: string;+password: string|]
+[&lt;interface&gt;AuthResponse|+user: User|]
+[AuthService]  -  [UsersRepository]
+[ExerciseService|-exerciseRepository: ExercisesRepository|+createExercise(): Promise&lt;Exercise&gt;;+getAllExercises(): Promise&lt;Exercise\[\]&gt;;+getExercise(): Promise&lt;Exercise&gt;;+deleteExercise(): Promise&lt;Exercise&gt;;+updateExercise(): Promise&lt;Exercise&gt;]
+[&lt;interface&gt;CreateExerciseRequest|+id?: string;+name: string;+target_muscle: string;+machine: string;+comment?: string \| null;+reps: number;+sets: number;+restTime: number|]
+[ExerciseService]  -  [ExercisesRepository]
+[TrainingService|-trainingRepository: TrainingRepository|+create(): Promise&lt;Training \| null&gt;;+getTraning(): Promise&lt;Training \| null&gt;;+getAll(): Promise&lt;Training\[\] \| null&gt;;+delete(): Promise&lt;void&gt;;+update(): Promise&lt;Training \| null&gt;;+removeExerciseFromTraining(): Promise&lt;void&gt;]
+[TrainingService]  -  [TrainingRepository]
+[UserService|-usersRepository: UsersRepository;-trainingRepository: TrainingRepository|+createUser(): Promise&lt;void&gt;;+update(): Promise&lt;User \| null&gt;;+getUserByEmail(): Promise&lt;User&gt;;+getUserById(): Promise&lt;User&gt;;+deleteByEmail(): Promise&lt;void&gt;]
+[&lt;interface&gt;CreateUserRequest|+name: string;+email: string;+password: string;+phone: string;+birthday: Date|]
+[UserService]  -  [UsersRepository]
+[UserService]  -  [TrainingRepository]
+[&lt;interface&gt;userRestrict|+id: string;+name: string|]
+[PrismaExerciseRepository||+create(): Promise&lt;Exercise&gt;;+getAll(): Promise&lt;Exercise\[\]&gt;;+get(): Promise&lt;Exercise&gt;;+delete(): Promise&lt;Exercise&gt;;+update(): Promise&lt;Exercise&gt;]
+[ExercisesRepository]&lt;:--[PrismaExerciseRepository]
+[PrismaTrainingRepository||+create(): Promise&lt;Training&gt;;+findById(): Promise&lt;Training \| null&gt;;+getAll(): Promise&lt;Training\[\]&gt;;+findByUserId(): Promise&lt;Training\[\]&gt;;+deleteByUserId(): Promise&lt;void&gt;;+deleteById(): Promise&lt;void&gt;;+update(): Promise&lt;Training&gt;;+removeExerciseFromTraining(): Promise&lt;void&gt;]
+[TrainingRepository]&lt;:--[PrismaTrainingRepository]
+[PrismaUserRepository||+findByEmail(): Promise&lt;User \| null&gt;;+findById(): Promise&lt;User \| null&gt;;+create(): Promise&lt;User&gt;;+deleteByEmail(): Promise&lt;User \| null&gt;;+update(): Promise&lt;User \| null&gt;]
+[UsersRepository]&lt;:--[PrismaUserRepository]
+[InvalidCredentialsError||]
+[UserAlreadyExistError||]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="661.0" width="3747.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<path d="M888.0 134.0 L888 195 L1796.5 286.23190098085007 L1796.5 286.2 " fill="none"></path>
+<path d="M1629.0 164.0 L1629 195 L1629 237.5 L1629.0 237.5 " fill="none"></path>
+<path d="M2650.0 171.5 L2650 195 L2649.953488372093 215 L2650.0 215.0 " fill="none"></path>
+<path d="M2135.8 171.5 L2104 195 L2046.4767441860465 237.5 L2046.5 237.5 " fill="none"></path>
+<path d="M2390.3 171.5 L2429.75 195 L2470.6802325581393 215 L2470.7 215.0 " fill="none"></path>
+<g stroke-dasharray="6 6">
+<path d="M1629.0 380.8 L1629 410 L1629 452.5 L1629.0 452.5 " fill="none"></path>
+</g>
+<path d="M1634.3 380.8 L1629.0 380.8 L1623.7 380.8 L1629.0 367.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M2649.8 403.3 L2649.75 410 L2649.75 430 L2649.8 430.0 " fill="none"></path>
+</g>
+<path d="M2655.1 403.3 L2649.8 403.3 L2644.4 403.3 L2649.8 390.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M1958.5 380.8 L1958.5 410 L1958.5 452.5 L1958.5 452.5 " fill="none"></path>
+</g>
+<path d="M1963.8 380.8 L1958.5 380.8 L1953.2 380.8 L1958.5 367.5 Z"></path>
+<g data-name="ExercisesRepository">
+<g fill="lightblue" stroke="#33322E" data-name="ExercisesRepository">
+<rect x="1501.5" y="237.5" height="130.0" width="255.0" data-name="ExercisesRepository"></rect>
+<path d="M1501.5 268.5 L1756.5 268.5" fill="none" data-name="ExercisesRepository"></path>
+<path d="M1501.5 276.5 L1756.5 276.5" fill="none" data-name="ExercisesRepository"></path>
+</g>
+<g transform="translate(1501.5, 237.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ExercisesRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ExercisesRepository">
+<a id="src\repositories\exercise-repository.ts.ExercisesRepository" xlink:href="src\repositories\exercise-repository.ts"><text x="119.5" y="13.5" stroke="none" text-anchor="middle" data-name="ExercisesRepository">ExercisesRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(1501.5, 268.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ExercisesRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ExercisesRepository">
+
+</g>
+</g>
+<g transform="translate(1501.5, 276.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ExercisesRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ExercisesRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="ExercisesRepository">+create(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ExercisesRepository">+getAll(): Promise&lt;Exercise[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ExercisesRepository">+get(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ExercisesRepository">+delete(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="ExercisesRepository">+update(): Promise&lt;Exercise&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PersonalRepository">
+<g fill="lightblue" stroke="#33322E" data-name="PersonalRepository">
+<rect x="0.0" y="37.5" height="100.0" width="366.0" data-name="PersonalRepository"></rect>
+<path d="M0.0 68.5 L366.0 68.5" fill="none" data-name="PersonalRepository"></path>
+<path d="M0.0 76.5 L366.0 76.5" fill="none" data-name="PersonalRepository"></path>
+</g>
+<g transform="translate(0, 37.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PersonalRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PersonalRepository">
+<a id="src\repositories\personals-repository.ts.PersonalRepository" xlink:href="src\repositories\personals-repository.ts"><text x="175.0" y="13.5" stroke="none" text-anchor="middle" data-name="PersonalRepository">PersonalRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 68.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PersonalRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PersonalRepository">
+
+</g>
+</g>
+<g transform="translate(0, 76.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PersonalRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PersonalRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="PersonalRepository">+create(): Promise&lt;Personal&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PersonalRepository">+findById(): Promise&lt;Personal | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PersonalRepository">+deleteByUserId(): Promise&lt;Personal | null&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="TraineeRepository">
+<g fill="lightblue" stroke="#33322E" data-name="TraineeRepository">
+<rect x="406.0" y="37.5" height="100.0" width="282.0" data-name="TraineeRepository"></rect>
+<path d="M406.0 68.5 L688.0 68.5" fill="none" data-name="TraineeRepository"></path>
+<path d="M406.0 76.5 L688.0 76.5" fill="none" data-name="TraineeRepository"></path>
+</g>
+<g transform="translate(406, 37.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TraineeRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TraineeRepository">
+<a id="src\repositories\trainees-repository.ts.TraineeRepository" xlink:href="src\repositories\trainees-repository.ts"><text x="133.0" y="13.5" stroke="none" text-anchor="middle" data-name="TraineeRepository">TraineeRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(406, 68.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TraineeRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TraineeRepository">
+
+</g>
+</g>
+<g transform="translate(406, 76.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TraineeRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TraineeRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="TraineeRepository">+create(): Promise&lt;Trainee&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="TraineeRepository">+findById(): Promise&lt;any&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="TraineeRepository">+deleteByUserId(): Promise&lt;any&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="TrainingRepository">
+<g fill="lightblue" stroke="#33322E" data-name="TrainingRepository">
+<rect x="2451.8" y="215.0" height="175.0" width="396.0" data-name="TrainingRepository"></rect>
+<path d="M2451.8 246.0 L2847.8 246.0" fill="none" data-name="TrainingRepository"></path>
+<path d="M2451.8 254.0 L2847.8 254.0" fill="none" data-name="TrainingRepository"></path>
+</g>
+<g transform="translate(2451.75, 215)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TrainingRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TrainingRepository">
+<a id="src\repositories\training-repository.ts.TrainingRepository" xlink:href="src\repositories\training-repository.ts"><text x="190.0" y="13.5" stroke="none" text-anchor="middle" data-name="TrainingRepository">TrainingRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(2451.75, 246)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TrainingRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TrainingRepository">
+
+</g>
+</g>
+<g transform="translate(2451.75, 254)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TrainingRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TrainingRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="TrainingRepository">+create(): Promise&lt;Training | null&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="TrainingRepository">+findById(): Promise&lt;Training | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="TrainingRepository">+getAll(): Promise&lt;Training[]&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="TrainingRepository">+deleteByUserId(): Promise&lt;void&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="TrainingRepository">+deleteById(): Promise&lt;void&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="TrainingRepository">+findByUserId(): Promise&lt;Training[]&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="TrainingRepository">+update(): Promise&lt;Training | null&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="TrainingRepository">+removeExerciseFromTraining(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersRepository">
+<g fill="lightblue" stroke="#33322E" data-name="UsersRepository">
+<rect x="1796.5" y="237.5" height="130.0" width="324.0" data-name="UsersRepository"></rect>
+<path d="M1796.5 268.5 L2120.5 268.5" fill="none" data-name="UsersRepository"></path>
+<path d="M1796.5 276.5 L2120.5 276.5" fill="none" data-name="UsersRepository"></path>
+</g>
+<g transform="translate(1796.5, 237.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersRepository">
+<a id="src\repositories\users-repository.ts.UsersRepository" xlink:href="src\repositories\users-repository.ts"><text x="154.0" y="13.5" stroke="none" text-anchor="middle" data-name="UsersRepository">UsersRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(1796.5, 268.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersRepository">
+
+</g>
+</g>
+<g transform="translate(1796.5, 276.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersRepository">+create(): Promise&lt;User&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersRepository">+findByEmail(): Promise&lt;User | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UsersRepository">+findById(): Promise&lt;User | null&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UsersRepository">+deleteByEmail(): Promise&lt;User | null&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UsersRepository">+update(): Promise&lt;User | null&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="AuthService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthService">
+<rect x="728.0" y="41.0" height="93.0" width="320.0" data-name="AuthService"></rect>
+<path d="M728.0 72.0 L1048.0 72.0" fill="none" data-name="AuthService"></path>
+<path d="M728.0 103.0 L1048.0 103.0" fill="none" data-name="AuthService"></path>
+</g>
+<g transform="translate(728, 41)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthService">
+<a id="src\services\auth-service.ts.AuthService" xlink:href="src\services\auth-service.ts"><text x="152.0" y="13.5" stroke="none" text-anchor="middle" data-name="AuthService">AuthService</text></a>
+
+</g>
+</g>
+<g transform="translate(728, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthService">-usersRepository: UsersRepository</text>
+
+</g>
+</g>
+<g transform="translate(728, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthService">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthService">+authUser(): Promise&lt;AuthResponse&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="AuthRequest">
+<g fill="lightblue" stroke="#33322E" data-name="AuthRequest">
+<rect x="1088.0" y="45.0" height="85.0" width="156.0" data-name="AuthRequest"></rect>
+<path d="M1088.0 76.0 L1244.0 76.0" fill="none" data-name="AuthRequest"></path>
+<path d="M1088.0 122.0 L1244.0 122.0" fill="none" data-name="AuthRequest"></path>
+</g>
+<g transform="translate(1088, 45)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthRequest">
+<a id="src\services\auth-service.ts.AuthRequest" xlink:href="src\services\auth-service.ts"><text x="70.0" y="13.5" stroke="none" text-anchor="middle" data-name="AuthRequest">AuthRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(1088, 76)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthRequest">+email: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthRequest">+password: string</text>
+
+</g>
+</g>
+<g transform="translate(1088, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthRequest">
+
+</g>
+</g>
+</g>
+<g data-name="AuthResponse">
+<g fill="lightblue" stroke="#33322E" data-name="AuthResponse">
+<rect x="1284.0" y="52.5" height="70.0" width="132.0" data-name="AuthResponse"></rect>
+<path d="M1284.0 83.5 L1416.0 83.5" fill="none" data-name="AuthResponse"></path>
+<path d="M1284.0 114.5 L1416.0 114.5" fill="none" data-name="AuthResponse"></path>
+</g>
+<g transform="translate(1284, 52.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthResponse">
+<a id="src\services\auth-service.ts.AuthResponse" xlink:href="src\services\auth-service.ts"><text x="58.0" y="13.5" stroke="none" text-anchor="middle" data-name="AuthResponse">AuthResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(1284, 83.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthResponse">+user: User</text>
+
+</g>
+</g>
+<g transform="translate(1284, 114.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthResponse">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthResponse">
+
+</g>
+</g>
+</g>
+<g data-name="ExerciseService">
+<g fill="#eee8d5" stroke="#33322E" data-name="ExerciseService">
+<rect x="1456.0" y="11.0" height="153.0" width="346.0" data-name="ExerciseService"></rect>
+<path d="M1456.0 42.0 L1802.0 42.0" fill="none" data-name="ExerciseService"></path>
+<path d="M1456.0 73.0 L1802.0 73.0" fill="none" data-name="ExerciseService"></path>
+</g>
+<g transform="translate(1456, 11)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ExerciseService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ExerciseService">
+<a id="src\services\exercise-service.ts.ExerciseService" xlink:href="src\services\exercise-service.ts"><text x="165.0" y="13.5" stroke="none" text-anchor="middle" data-name="ExerciseService">ExerciseService</text></a>
+
+</g>
+</g>
+<g transform="translate(1456, 42)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ExerciseService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ExerciseService">
+<text x="0.0" y="13.5" stroke="none" data-name="ExerciseService">-exerciseRepository: ExercisesRepository</text>
+
+</g>
+</g>
+<g transform="translate(1456, 73)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ExerciseService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ExerciseService">
+<text x="0.0" y="13.5" stroke="none" data-name="ExerciseService">+createExercise(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ExerciseService">+getAllExercises(): Promise&lt;Exercise[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ExerciseService">+getExercise(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ExerciseService">+deleteExercise(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="ExerciseService">+updateExercise(): Promise&lt;Exercise&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="CreateExerciseRequest">
+<g fill="lightblue" stroke="#33322E" data-name="CreateExerciseRequest">
+<rect x="1842.0" y="0.0" height="175.0" width="205.0" data-name="CreateExerciseRequest"></rect>
+<path d="M1842.0 31.0 L2047.0 31.0" fill="none" data-name="CreateExerciseRequest"></path>
+<path d="M1842.0 167.0 L2047.0 167.0" fill="none" data-name="CreateExerciseRequest"></path>
+</g>
+<g transform="translate(1842, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateExerciseRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreateExerciseRequest">
+<a id="src\services\exercise-service.ts.CreateExerciseRequest" xlink:href="src\services\exercise-service.ts"><text x="94.5" y="13.5" stroke="none" text-anchor="middle" data-name="CreateExerciseRequest">CreateExerciseRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(1842, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateExerciseRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CreateExerciseRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="CreateExerciseRequest">+id?: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="CreateExerciseRequest">+name: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="CreateExerciseRequest">+target_muscle: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="CreateExerciseRequest">+machine: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="CreateExerciseRequest">+comment?: string | null</text>
+<text x="0.0" y="88.5" stroke="none" data-name="CreateExerciseRequest">+reps: number</text>
+<text x="0.0" y="103.5" stroke="none" data-name="CreateExerciseRequest">+sets: number</text>
+<text x="0.0" y="118.5" stroke="none" data-name="CreateExerciseRequest">+restTime: number</text>
+
+</g>
+</g>
+<g transform="translate(1842, 167)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateExerciseRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CreateExerciseRequest">
+
+</g>
+</g>
+</g>
+<g data-name="TrainingService">
+<g fill="#eee8d5" stroke="#33322E" data-name="TrainingService">
+<rect x="2452.0" y="3.5" height="168.0" width="396.0" data-name="TrainingService"></rect>
+<path d="M2452.0 34.5 L2848.0 34.5" fill="none" data-name="TrainingService"></path>
+<path d="M2452.0 65.5 L2848.0 65.5" fill="none" data-name="TrainingService"></path>
+</g>
+<g transform="translate(2452, 3.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TrainingService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TrainingService">
+<a id="src\services\training-service.ts.TrainingService" xlink:href="src\services\training-service.ts"><text x="190.0" y="13.5" stroke="none" text-anchor="middle" data-name="TrainingService">TrainingService</text></a>
+
+</g>
+</g>
+<g transform="translate(2452, 34.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TrainingService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TrainingService">
+<text x="0.0" y="13.5" stroke="none" data-name="TrainingService">-trainingRepository: TrainingRepository</text>
+
+</g>
+</g>
+<g transform="translate(2452, 65.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TrainingService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TrainingService">
+<text x="0.0" y="13.5" stroke="none" data-name="TrainingService">+create(): Promise&lt;Training | null&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="TrainingService">+getTraning(): Promise&lt;Training | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="TrainingService">+getAll(): Promise&lt;Training[] | null&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="TrainingService">+delete(): Promise&lt;void&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="TrainingService">+update(): Promise&lt;Training | null&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="TrainingService">+removeExerciseFromTraining(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UserService">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserService">
+<rect x="2087.0" y="3.5" height="168.0" width="325.0" data-name="UserService"></rect>
+<path d="M2087.0 34.5 L2412.0 34.5" fill="none" data-name="UserService"></path>
+<path d="M2087.0 80.5 L2412.0 80.5" fill="none" data-name="UserService"></path>
+</g>
+<g transform="translate(2087, 3.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserService">
+<a id="src\services\user-service.ts.UserService" xlink:href="src\services\user-service.ts"><text x="154.5" y="13.5" stroke="none" text-anchor="middle" data-name="UserService">UserService</text></a>
+
+</g>
+</g>
+<g transform="translate(2087, 34.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserService">
+<text x="0.0" y="13.5" stroke="none" data-name="UserService">-usersRepository: UsersRepository</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UserService">-trainingRepository: TrainingRepository</text>
+
+</g>
+</g>
+<g transform="translate(2087, 80.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserService">
+<text x="0.0" y="13.5" stroke="none" data-name="UserService">+createUser(): Promise&lt;void&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UserService">+update(): Promise&lt;User | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UserService">+getUserByEmail(): Promise&lt;User&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UserService">+getUserById(): Promise&lt;User&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UserService">+deleteByEmail(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="CreateUserRequest">
+<g fill="lightblue" stroke="#33322E" data-name="CreateUserRequest">
+<rect x="2888.0" y="22.5" height="130.0" width="172.0" data-name="CreateUserRequest"></rect>
+<path d="M2888.0 53.5 L3060.0 53.5" fill="none" data-name="CreateUserRequest"></path>
+<path d="M2888.0 144.5 L3060.0 144.5" fill="none" data-name="CreateUserRequest"></path>
+</g>
+<g transform="translate(2888, 22.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateUserRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreateUserRequest">
+<a id="src\services\user-service.ts.CreateUserRequest" xlink:href="src\services\user-service.ts"><text x="78.0" y="13.5" stroke="none" text-anchor="middle" data-name="CreateUserRequest">CreateUserRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(2888, 53.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateUserRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CreateUserRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="CreateUserRequest">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="CreateUserRequest">+email: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="CreateUserRequest">+password: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="CreateUserRequest">+phone: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="CreateUserRequest">+birthday: Date</text>
+
+</g>
+</g>
+<g transform="translate(2888, 144.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreateUserRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CreateUserRequest">
+
+</g>
+</g>
+</g>
+<g data-name="userRestrict">
+<g fill="lightblue" stroke="#33322E" data-name="userRestrict">
+<rect x="3100.0" y="45.0" height="85.0" width="124.0" data-name="userRestrict"></rect>
+<path d="M3100.0 76.0 L3224.0 76.0" fill="none" data-name="userRestrict"></path>
+<path d="M3100.0 122.0 L3224.0 122.0" fill="none" data-name="userRestrict"></path>
+</g>
+<g transform="translate(3100, 45)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="userRestrict">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="userRestrict">
+<a id="src\http\controllers\authenticate.ts.userRestrict" xlink:href="src\http\controllers\authenticate.ts"><text x="54.0" y="13.5" stroke="none" text-anchor="middle" data-name="userRestrict">userRestrict</text></a>
+
+</g>
+</g>
+<g transform="translate(3100, 76)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="userRestrict">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="userRestrict">
+<text x="0.0" y="13.5" stroke="none" data-name="userRestrict">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="userRestrict">+name: string</text>
+
+</g>
+</g>
+<g transform="translate(3100, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="userRestrict">
+<g transform="translate(8, 8)" fill="#33322E" data-name="userRestrict">
+
+</g>
+</g>
+</g>
+<g data-name="PrismaExerciseRepository">
+<g fill="#eee8d5" stroke="#33322E" data-name="PrismaExerciseRepository">
+<rect x="1501.5" y="452.5" height="130.0" width="255.0" data-name="PrismaExerciseRepository"></rect>
+<path d="M1501.5 483.5 L1756.5 483.5" fill="none" data-name="PrismaExerciseRepository"></path>
+<path d="M1501.5 491.5 L1756.5 491.5" fill="none" data-name="PrismaExerciseRepository"></path>
+</g>
+<g transform="translate(1501.5, 452.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PrismaExerciseRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PrismaExerciseRepository">
+<a id="src\repositories\prisma\prisma-exercise-repository.ts.PrismaExerciseRepository" xlink:href="src\repositories\prisma\prisma-exercise-repository.ts"><text x="119.5" y="13.5" stroke="none" text-anchor="middle" data-name="PrismaExerciseRepository">PrismaExerciseRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(1501.5, 483.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaExerciseRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PrismaExerciseRepository">
+
+</g>
+</g>
+<g transform="translate(1501.5, 491.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaExerciseRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PrismaExerciseRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="PrismaExerciseRepository">+create(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PrismaExerciseRepository">+getAll(): Promise&lt;Exercise[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PrismaExerciseRepository">+get(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PrismaExerciseRepository">+delete(): Promise&lt;Exercise&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PrismaExerciseRepository">+update(): Promise&lt;Exercise&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PrismaTrainingRepository">
+<g fill="#eee8d5" stroke="#33322E" data-name="PrismaTrainingRepository">
+<rect x="2451.8" y="430.0" height="175.0" width="396.0" data-name="PrismaTrainingRepository"></rect>
+<path d="M2451.8 461.0 L2847.8 461.0" fill="none" data-name="PrismaTrainingRepository"></path>
+<path d="M2451.8 469.0 L2847.8 469.0" fill="none" data-name="PrismaTrainingRepository"></path>
+</g>
+<g transform="translate(2451.75, 430)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PrismaTrainingRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PrismaTrainingRepository">
+<a id="src\repositories\prisma\prisma-training-repository.ts.PrismaTrainingRepository" xlink:href="src\repositories\prisma\prisma-training-repository.ts"><text x="190.0" y="13.5" stroke="none" text-anchor="middle" data-name="PrismaTrainingRepository">PrismaTrainingRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(2451.75, 461)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaTrainingRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PrismaTrainingRepository">
+
+</g>
+</g>
+<g transform="translate(2451.75, 469)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaTrainingRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PrismaTrainingRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="PrismaTrainingRepository">+create(): Promise&lt;Training&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PrismaTrainingRepository">+findById(): Promise&lt;Training | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PrismaTrainingRepository">+getAll(): Promise&lt;Training[]&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PrismaTrainingRepository">+findByUserId(): Promise&lt;Training[]&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PrismaTrainingRepository">+deleteByUserId(): Promise&lt;void&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PrismaTrainingRepository">+deleteById(): Promise&lt;void&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PrismaTrainingRepository">+update(): Promise&lt;Training&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PrismaTrainingRepository">+removeExerciseFromTraining(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PrismaUserRepository">
+<g fill="#eee8d5" stroke="#33322E" data-name="PrismaUserRepository">
+<rect x="1796.5" y="452.5" height="130.0" width="324.0" data-name="PrismaUserRepository"></rect>
+<path d="M1796.5 483.5 L2120.5 483.5" fill="none" data-name="PrismaUserRepository"></path>
+<path d="M1796.5 491.5 L2120.5 491.5" fill="none" data-name="PrismaUserRepository"></path>
+</g>
+<g transform="translate(1796.5, 452.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PrismaUserRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PrismaUserRepository">
+<a id="src\repositories\prisma\prisma-user-repository.ts.PrismaUserRepository" xlink:href="src\repositories\prisma\prisma-user-repository.ts"><text x="154.0" y="13.5" stroke="none" text-anchor="middle" data-name="PrismaUserRepository">PrismaUserRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(1796.5, 483.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaUserRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PrismaUserRepository">
+
+</g>
+</g>
+<g transform="translate(1796.5, 491.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PrismaUserRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PrismaUserRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="PrismaUserRepository">+findByEmail(): Promise&lt;User | null&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PrismaUserRepository">+findById(): Promise&lt;User | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PrismaUserRepository">+create(): Promise&lt;User&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PrismaUserRepository">+deleteByEmail(): Promise&lt;User | null&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PrismaUserRepository">+update(): Promise&lt;User | null&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="InvalidCredentialsError">
+<g fill="#eee8d5" stroke="#33322E" data-name="InvalidCredentialsError">
+<rect x="3264.0" y="64.0" height="47.0" width="197.0" data-name="InvalidCredentialsError"></rect>
+<path d="M3264.0 95.0 L3461.0 95.0" fill="none" data-name="InvalidCredentialsError"></path>
+<path d="M3264.0 103.0 L3461.0 103.0" fill="none" data-name="InvalidCredentialsError"></path>
+</g>
+<g transform="translate(3264, 64)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="InvalidCredentialsError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="InvalidCredentialsError">
+<a id="src\services\errors\invalid-credentials-error.ts.InvalidCredentialsError" xlink:href="src\services\errors\invalid-credentials-error.ts"><text x="90.5" y="13.5" stroke="none" text-anchor="middle" data-name="InvalidCredentialsError">InvalidCredentialsError</text></a>
+
+</g>
+</g>
+<g transform="translate(3264, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="InvalidCredentialsError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="InvalidCredentialsError">
+
+</g>
+</g>
+<g transform="translate(3264, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="InvalidCredentialsError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="InvalidCredentialsError">
+
+</g>
+</g>
+</g>
+<g data-name="UserAlreadyExistError">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserAlreadyExistError">
+<rect x="3501.0" y="64.0" height="47.0" width="190.0" data-name="UserAlreadyExistError"></rect>
+<path d="M3501.0 95.0 L3691.0 95.0" fill="none" data-name="UserAlreadyExistError"></path>
+<path d="M3501.0 103.0 L3691.0 103.0" fill="none" data-name="UserAlreadyExistError"></path>
+</g>
+<g transform="translate(3501, 64)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserAlreadyExistError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserAlreadyExistError">
+<a id="src\services\errors\user-already-exist-error.ts.UserAlreadyExistError" xlink:href="src\services\errors\user-already-exist-error.ts"><text x="87.0" y="13.5" stroke="none" text-anchor="middle" data-name="UserAlreadyExistError">UserAlreadyExistError</text></a>
+
+</g>
+</g>
+<g transform="translate(3501, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserAlreadyExistError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserAlreadyExistError">
+
+</g>
+</g>
+<g transform="translate(3501, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserAlreadyExistError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserAlreadyExistError">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
