@@ -15,13 +15,13 @@ describe('UserService', () => {
 	let usersRepository: UsersRepository;
 	let trainingRepository: TrainingRepository;
 
-	describe('createUser', () => {
-		beforeEach(() => {
-			usersRepository = new InMemoryUserRepository();
-			trainingRepository = new InMemoryTrainingRepository();
-			userService = new UserService(usersRepository, trainingRepository);
-		});
+	beforeEach(() => {
+		usersRepository = new InMemoryUserRepository();
+		trainingRepository = new InMemoryTrainingRepository();
+		userService = new UserService(usersRepository, trainingRepository);
+	});
 
+	describe('createUser', () => {
 		it('should create a new user', async () => {
 			const createUserRequest = {
 				name: 'John Doe',

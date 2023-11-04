@@ -1,123 +1,126 @@
 import { prisma } from '@/lib/prisma';
 import { Prisma, Training } from '@prisma/client';
-import { TrainingRepository } from '../training-repository'
+import { TrainingRepository } from '../training-repository';
 
 export class PrismaTrainingRepository implements TrainingRepository {
-  async create(trainingData: Prisma.TrainingCreateInput): Promise<Training> {
-    const treinamento = await prisma.training.create({
-      data: trainingData,
-      include: {
-        ExerciseOnTrainig: true
-      }
-    });
+	async create(
+		trainingData: Prisma.TrainingUncheckedCreateInput
+	): Promise<Training> {
+		const treinamento = await prisma.training.create({
+			data: trainingData,
+			include: {
+				ExerciseOnTrainig: true,
+			},
+		});
 
-    return treinamento;
-  }
+		return treinamento;
+	}
 
-  async findById(id: string): Promise<Training | null> {
-    const training = await prisma.training.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        ExerciseOnTrainig: true
-      }
-    });
-    return training;
-  }
+	async findById(id: string): Promise<Training | null> {
+		const training = await prisma.training.findUnique({
+			where: {
+				id,
+			},
+			include: {
+				ExerciseOnTrainig: true,
+			},
+		});
+		return training;
+	}
 
-  async getAll(): Promise<Training[]> {
-    const trainings = await prisma.training.findMany({
-      include: {
-        ExerciseOnTrainig: true
-      }
-    });
-    return trainings;
-  }
+	async getAll(): Promise<Training[]> {
+		const trainings = await prisma.training.findMany({
+			include: {
+				ExerciseOnTrainig: true,
+			},
+		});
+		return trainings;
+	}
 
-  async findByUserId(userId: string): Promise<Training[]> {
-    const trainings = await prisma.training.findMany({
-      where: {
-        userId: userId
-      }
-    });
+	async findByUserId(userId: string): Promise<Training[]> {
+		const trainings = await prisma.training.findMany({
+			where: {
+				userId: userId,
+			},
+		});
 
-    return trainings;
-  }
+		return trainings;
+	}
 
-  async deleteByUserId(userId: string): Promise<void> {
-    try {
+	async deleteByUserId(userId: string): Promise<void> {
+		try {
+			await prisma.exerciseOnTrainig.deleteMany({
+				where: {
+					training: {
+						userId: userId,
+					},
+				},
+			});
 
-      await prisma.exerciseOnTrainig.deleteMany({
-        where: {
-          training: {
-            userId: userId
-          }
-        }
-      });
+			await prisma.training.deleteMany({
+				where: {
+					userId: userId,
+				},
+			});
+		} catch (error) {
+			console.error(error);
+			throw new Error('Erro ao excluir os treinamentos pelo userId');
+		}
+	}
 
-      await prisma.training.deleteMany({
-        where: {
-          userId: userId
-        }
-      });
+	async deleteById(id: string): Promise<void> {
+		try {
+			console.log(id);
 
-    } catch (error) {
-      console.error(error)
-      throw new Error('Erro ao excluir os treinamentos pelo userId');
-    }
-  }
+			await prisma.exerciseOnTrainig.deleteMany({
+				where: {
+					training: {
+						id: id,
+					},
+				},
+			});
 
-  async deleteById(id: string): Promise<void> {
-    try {
+			await prisma.training.deleteMany({
+				where: {
+					id: id,
+				},
+			});
+		} catch (error) {
+			console.error(error);
+			throw new Error('Erro ao excluir os treinamentos pelo userId');
+		}
+	}
 
-      console.log(id);
+	async update(
+		id: string,
+		data: Partial<Prisma.TrainingUpdateInput>
+	): Promise<Training> {
+		try {
+			const training = await prisma.training.update({
+				where: {
+					id,
+				},
+				data,
+				include: {
+					ExerciseOnTrainig: true,
+				},
+			});
+			return training;
+		} catch (error) {
+			console.error('Erro ao atualizar o treinamento:', error);
+			throw new Error('Não possível processar sua solicitação.');
+		}
+	}
 
-      await prisma.exerciseOnTrainig.deleteMany({
-        where: {
-          training: {
-            id: id
-          }
-        }
-      });
-
-      await prisma.training.deleteMany({
-        where: {
-          id: id
-        }
-      });
-
-    } catch (error) {
-      console.error(error)
-      throw new Error('Erro ao excluir os treinamentos pelo userId');
-    }
-  }
-
-  async update(id: string, data: Partial<Prisma.TrainingUpdateInput>): Promise<Training> {
-    try {
-      const training = await prisma.training.update({
-        where: {
-          id,
-        },
-        data,
-        include: {
-          ExerciseOnTrainig: true
-        }
-      });
-      return training;
-    } catch (error) {
-      console.error("Erro ao atualizar o treinamento:", error);
-      throw new Error("Não possível processar sua solicitação.");
-    }
-  }
-
-  async removeExerciseFromTraining(exerciseId: string, trainingId: string): Promise<void> {
-    await prisma.exerciseOnTrainig.deleteMany({
-      where: {
-        exerciseId,
-        trainingId,
-      },
-    });
-  }
-
+	async removeExerciseFromTraining(
+		exerciseId: string,
+		trainingId: string
+	): Promise<void> {
+		await prisma.exerciseOnTrainig.deleteMany({
+			where: {
+				exerciseId,
+				trainingId,
+			},
+		});
+	}
 }
