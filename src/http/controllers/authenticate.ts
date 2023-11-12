@@ -25,7 +25,12 @@ export async function authenticate(
 
 		const { user } = await userService.authUser({ email, password });
 
-		const UserPerfil = { id: user.id, name: user.name };
+		const UserPerfil = {
+			id: user.id,
+			name: user.name,
+			user: user.name,
+			email: user.email,
+		};
 
 		const token = await reply.jwtSign(
 			{ UserPerfil },
